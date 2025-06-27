@@ -4,8 +4,8 @@ Donate Link: https://coderzonebd.com/
 Tags: woocommerce, checkout, incomplete orders, abandoned cart, recovery, fraud, tracker, analytics
 Stable tag: 1.0
 Tested up to: 6.8
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
