@@ -1,0 +1,94 @@
+/*
+ * Advanced Checkout Tracker - Frontend Popup Styles
+ */
+
+.act-checkout-modal {
+    position: fixed;
+    z-index: 100001;
+    /* High z-index to appear over everything */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    /* Use flexbox for vertical centering */
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    -webkit-animation-name: act-fade-in;
+    animation-name: act-fade-in;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+}
+
+@-webkit-keyframes act-fade-in {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+@keyframes act-fade-in {
+    from {
+        opacity: 0
+    }
+    to {
+        opacity: 1
+    }
+}
+
+.act-checkout-modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    width: 95%;
+    max-width: 450px;
+    border-radius: 8px;
+    position: relative;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.act-checkout-modal-close {
+    color: #aaa;
+    position: absolute;
+    top: 8px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.act-checkout-modal-close:hover,
+.act-checkout-modal-close:focus {
+    color: #333;
+    text-decoration: none;
+}
+
+#act-checkout-modal-body {
+    font-size: 16px;
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 20px;
+}
+
+.act-checkout-modal-button {
+    background-color: #d32f2f;
+    /* Red color for error */
+    color: white;
+    padding: 10px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.act-checkout-modal-button:hover {
+    background-color: #b71c1c;
+}

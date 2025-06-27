@@ -1,0 +1,926 @@
+/* ===================================================================
+ *
+ * Main Stylesheet for Advanced Checkout Tracker
+ *
+ * 1.  General & Root Variables
+ * 2.  Modal Styles
+ * 3.  Filter Bar
+ * 4.  Dashboard & Stat Boxes
+ * 5.  Loading Spinner
+ * 6.  List Tables & Actions
+ * 7.  Fraud Blocker Page
+ * 8.  WooCommerce Order List Ratio (Compact Bar)
+ * 9.  Redesigned Courier Analytics (Doughnut Chart & Full Table)
+ * 10. Responsive Styles
+ *
+ * =================================================================== */
+
+
+/*
+ * 1. General & Root Variables
+ * ------------------------------------------------------------------ */
+
+:root {
+    /* Primary & Accents */
+    --act-primary-color: #4f46e5;
+    /* A modern indigo */
+    --act-primary-hover: #4338ca;
+    --act-success-color: #10b981;
+    /* Green for success messages/stats */
+    --act-danger-color: #ef4444;
+    /* Red for errors/warnings */
+    /* Backgrounds & Borders */
+    --act-background-color: #f8fafc;
+    /* A very light gray background */
+    --act-card-background: #ffffff;
+    --act-card-border: #e2e8f0;
+    /* Softer border color */
+    --act-table-header-bg: #f1f5f9;
+    /* Text */
+    --act-text-primary: #1e293b;
+    --act-text-secondary: #64748b;
+    /* Other */
+    --act-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    --act-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --act-border-radius: 6px;
+}
+
+.wrap.act-dashboard-wrap,
+.wrap.act-incomplete-wrap,
+.wrap.act-recovered-wrap,
+.wrap.act-hold-wrap,
+.wrap.act-cancelled-wrap,
+.wrap.act-fraud-blocker-wrap,
+.wrap.act-courier-analytics-wrap {
+    background-color: var(--act-background-color);
+    padding: 15px 20px;
+    border: 1px solid var(--act-border-color);
+    box-shadow: var(--act-shadow);
+}
+
+
+/*
+ * 2. Modal Styles
+ * ------------------------------------------------------------------ */
+
+.act-modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+}
+
+.act-modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 700px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position: relative;
+}
+
+.act-modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+}
+
+.act-modal-close:hover,
+.act-modal-close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#act-modal-body h3 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#act-modal-body p {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+#act-modal-body ul {
+    list-style: disc;
+    margin-left: 20px;
+}
+
+
+/*
+ * 3. Filter Bar
+ * ------------------------------------------------------------------ */
+
+.act-list-page-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: var(--act-card-background);
+    border: 1px solid var(--act-card-border);
+}
+
+.act-list-page-filters .act-filter-buttons {
+    margin-bottom: 10px;
+}
+
+.act-list-page-filters .act-filter-buttons .button {
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.act-list-page-filters .act-filter-buttons .button.active {
+    background: var(--act-primary-color);
+    color: #fff;
+    border-color: var(--act-primary-color);
+    box-shadow: inset 0 0 0 1px var(--act-primary-color);
+}
+
+.act-list-page-filters .act-date-range-filter label {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.act-list-page-filters .act-date-range-filter input[type="date"] {
+    padding: 5px;
+    border: 1px solid #ddd;
+    margin-bottom: 5px;
+}
+
+
+/*
+ * 4a. Dashboard Responsive Layout
+ * ------------------------------------------------------------------ */
+
+.act-dashboard-layout-container {
+    display: flex;
+    flex-direction: row;
+    /* Side-by-side on desktop */
+    align-items: flex-start;
+    gap: 20px;
+    /* Increased gap for better spacing */
+    margin-top: 20px;
+}
+
+.act-dashboard-layout-left {
+    flex: 1;
+    /* Chart takes 1 part of the space */
+    min-width: 250px;
+}
+
+.act-dashboard-layout-right {
+    flex: 3;
+    /* Stat boxes take 2 parts of the space */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+/* Ensure stat rows in the right column don't have extra bottom margin */
+
+.act-dashboard-layout-right .act-stat-row {
+    margin-bottom: 0;
+}
+
+.act-dashboard-chart-container {
+    width: 100%;
+    max-width: 300px;
+    /* Default larger size */
+    margin: 10px auto 25px auto;
+    position: relative;
+}
+
+.act-dashboard-chart-container canvas {
+    max-width: 100%;
+    height: auto !important;
+}
+
+.act-stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.act-stat-box {
+    background-color: var(--act-card-background);
+    border: 1px solid var(--act-card-border);
+    padding: 30px 1px;
+    text-align: center;
+    box-shadow: var(--act-shadow);
+    flex-basis: 200px;
+    flex-grow: 1;
+    min-width: 150px;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+
+.act-stat-box h3 {
+    margin-top: 0;
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.act-stat-box p {
+    font-size: 1.8em;
+    font-weight: bold;
+    margin-bottom: 0;
+    color: var(--act-primary-color);
+    line-height: 1.2;
+}
+
+.act-stat-box-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.act-stat-box-link:hover,
+.act-stat-box-link:focus {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .1);
+    transform: translateY(-2px);
+    color: #2271b1;
+}
+
+.act-stat-box-link:hover h3,
+.act-stat-box-link:hover p {
+    color: #007cba;
+}
+
+
+/*
+ * 5. Loading Spinner
+ * ------------------------------------------------------------------ */
+
+.act-table-loader {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #fff;
+    border: 1px solid #ccd0d4;
+    margin-bottom: 20px;
+}
+
+.act-spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #007cba;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: act-spin 1s linear infinite;
+    margin: 0 auto 15px auto;
+}
+
+.act-table-loader p {
+    font-size: 1.1em;
+    color: #555;
+    margin: 0;
+}
+
+@keyframes act-spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+/*
+ * 6. List Tables & Actions
+ * ------------------------------------------------------------------ */
+
+.act-table-responsive-wrapper {
+    background-color: var(--act-card-background);
+    border: 1px solid var(--act-card-border);
+}
+
+.wp-list-table th,
+.wp-list-table td {
+    vertical-align: middle;
+    padding: 12px 10px;
+}
+
+tbody tr:hover {
+    background-color: #f0f6fc;
+}
+
+td a.act-view-details {
+    text-decoration: none;
+    color: inherit;
+}
+
+td a.act-view-details strong {
+    transition: color 0.15s ease-in-out;
+}
+
+td a.act-view-details:hover strong,
+td a.act-view-details:focus {
+    color: #007cba;
+}
+
+.act-actions-cell {
+    white-space: nowrap;
+}
+
+.act-actions-cell .button {
+    margin-right: 4px;
+    padding: 5px;
+    height: auto;
+    line-height: 1;
+    background-color: #f0f0f1;
+    border-color: #b0b1b3;
+    color: #1d2327;
+}
+
+.act-actions-cell .button:hover {
+    filter: brightness(95%);
+}
+
+.act-actions-cell .button.button-primary,
+.act-actions-cell a.act-recover-order {
+    background-color: #3858e9;
+    border-color: #3858e9;
+    color: #fff;
+}
+
+.act-actions-cell .button.button-primary:hover {
+    filter: brightness(110%);
+}
+
+.act-actions-cell .button .dashicons {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+
+/*
+ * 7. Fraud Blocker Page
+ * ------------------------------------------------------------------ */
+
+.act-blocker-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.act-blocker-section {
+    flex: 1;
+    min-width: 300px;
+    padding: 1px 20px 20px 20px;
+    background-color: var(--act-card-background);
+    border: 1px solid var(--act-card-border);
+    border-radius: 4px;
+}
+
+.act-blocker-section h2 {
+    border-bottom: 1px solid var(--act-card-border);
+    padding-bottom: 10px;
+    margin-top: 15px;
+}
+
+.act-blocker-section form {
+    margin-bottom: 20px;
+}
+
+.act-blocker-section input[type="text"],
+.act-blocker-section input[type="email"],
+.act-blocker-section textarea {
+    width: 100%;
+    max-width: 100%;
+}
+
+.act-search-wrapper {
+    margin: 0 0 10px 0;
+}
+
+.act-search-wrapper .act-blocker-search {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    /* Ensures padding doesn't affect width */
+}
+
+
+/* Style for the "no results" message */
+
+.act-blocked-list .act-no-results {
+    padding: 15px;
+    text-align: center;
+    color: #777;
+    font-style: italic;
+    background-color: transparent !important;
+    border: none;
+}
+
+.act-blocked-list {
+    list-style: none;
+    margin: 20px 0 0 0;
+    padding: 0;
+    max-height: 350px;
+    overflow-y: auto;
+    border: 1px solid var(--act-card-border);
+    border-radius: 4px;
+}
+
+.act-blocked-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 0;
+    transition: background-color 0.15s ease;
+}
+
+.act-blocked-list li:hover {
+    background-color: #fdfdfd;
+}
+
+.act-blocked-list li:last-child {
+    border-bottom: none;
+}
+
+.act-blocked-list li div {
+    flex-grow: 1;
+}
+
+.act-blocked-list li div strong {
+    font-size: 1.1em;
+    font-family: monospace;
+}
+
+.act-blocked-list li div small {
+    display: block;
+    color: #646970;
+    margin-top: 5px;
+}
+
+.act-blocked-list li .act-delete-item {
+    color: #b32d2e;
+    text-decoration: none;
+    flex-shrink: 0;
+    margin-left: 15px;
+}
+
+.act-blocked-list li .act-delete-item:hover {
+    color: #d63638;
+}
+
+
+/*
+ * 8. WooCommerce Order List Ratio (Compact Bar)
+ * ------------------------------------------------------------------ */
+
+.act-success-ratio-container {
+    position: relative;
+    min-height: 30px;
+}
+
+.act-ratio-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.act-ratio-stats {
+    font-size: 12px;
+    line-height: 1.3;
+    flex-shrink: 0;
+}
+
+.act-ratio-stats .act-ratio-success {
+    color: #2271b1;
+    font-weight: bold;
+    display: block;
+}
+
+.act-ratio-stats .act-ratio-cancel {
+    color: #d63638;
+    font-weight: bold;
+    display: block;
+}
+
+.act-ratio-bar-bg {
+    flex-grow: 1;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    height: 18px;
+    overflow: hidden;
+}
+
+.act-ratio-bar-fg {
+    background-color: #4CAF50;
+    height: 100%;
+    color: white;
+    font-size: 11px;
+    line-height: 18px;
+    text-align: center;
+    font-weight: bold;
+    min-width: 18px;
+}
+
+.act-refresh-order-ratio {
+    text-decoration: none;
+    color: #2271b1;
+}
+
+.act-refresh-order-ratio .dashicons {
+    font-size: 22px;
+    line-height: 1;
+}
+
+
+/*
+ * 9. Redesigned Courier Analytics (Doughnut Chart & Full Table)
+ * ------------------------------------------------------------------ */
+
+.act-redesign-container {
+    display: flex;
+    flex-direction: row;
+    /* Default is side-by-side columns */
+    flex-wrap: nowrap;
+    /* Prevent wrapping on desktop */
+    align-items: center;
+    /* Vertically align items in the center */
+    gap: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #e5e5e5;
+}
+
+.act-redesign-left {
+    flex: 1;
+    /* Takes up 1 part of the space */
+    min-width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.act-redesign-right {
+    flex: 3;
+    /* Takes up 3 parts of the space */
+    min-width: 0;
+    /* Allow this column to shrink */
+}
+
+.act-ratio-circle-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+}
+
+.act-ratio-circle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.act-ratio-circle-percent {
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1;
+    color: #333;
+}
+
+.act-ratio-circle-label {
+    font-size: 1em;
+    font-weight: bold;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.act-redesign-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.act-redesign-header h3 {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.act-redesign-refresh .dashicons {
+    vertical-align: middle;
+    margin-top: -3px;
+}
+
+.act-summary-boxes {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.act-summary-box {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+.act-summary-box .act-summary-value {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.act-summary-box .act-summary-label {
+    display: block;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 5px;
+}
+
+
+/* Styles for the scrollable table wrapper */
+
+.act-redesigned-table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+.act-redesigned-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 500px;
+    /* Force scrollbar on small screens */
+}
+
+.act-redesigned-table th,
+.act-redesigned-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: middle;
+    white-space: nowrap;
+    /* Prevent text wrapping */
+}
+
+.act-redesigned-table thead th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+    color: #333;
+}
+
+.act-redesigned-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.act-redesigned-table tbody tr:hover {
+    background-color: #f0f6fc;
+}
+
+.act-redesigned-table td.act-col-courier img {
+    height: 24px;
+    max-width: 90px;
+    width: auto;
+    display: block;
+}
+
+.act-redesigned-table .act-col-data {
+    text-align: center;
+    font-family: monospace;
+    font-size: 1.1em;
+}
+
+.act-redesigned-table .act-col-rate {
+    text-align: right;
+    font-weight: bold;
+}
+
+.act-redesigned-table em {
+    color: #d63638;
+    font-style: normal;
+}
+
+
+/*
+ * 10. Responsive Styles
+ * ------------------------------------------------------------------ */
+
+@media screen and (max-width: 782px) {
+    /* Responsive Tables */
+    .act-table-responsive-wrapper {
+        overflow-x: auto;
+        border: 1px solid #c3c4c7;
+        margin-bottom: 15px;
+    }
+    .act-table-responsive-wrapper .wp-list-table {
+        min-width: 800px;
+        table-layout: auto !important;
+    }
+    .act-table-responsive-wrapper .wp-list-table th,
+    .act-table-responsive-wrapper .wp-list-table td {
+        white-space: nowrap;
+    }
+    .act-table-responsive-wrapper .wp-list-table th:last-child {
+        width: auto !important;
+    }
+    /* Dashboard Chart */
+    .act-dashboard-chart-container {
+        width: 250px;
+    }
+    /* Courier Analytics Page */
+    .act-redesign-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 15px;
+    }
+    .act-redesign-container {
+        flex-direction: column;
+        /* Stack the columns */
+        align-items: stretch;
+        /* Allow columns to take full width */
+    }
+    .act-redesign-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    .act-summary-boxes {
+        flex-direction: column;
+    }
+    .act-dashboard-layout-container {
+        flex-direction: column;
+    }
+    .act-blocker-sections {
+        flex-direction: column;
+    }
+}
+
+
+/*
+ * 11. Order Page Blocker Meta Box
+ * ------------------------------------------------------------------ */
+
+.act-order-blocker-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.act-order-blocker-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.act-order-blocker-row:first-child {
+    padding-top: 0;
+}
+
+.act-order-blocker-label {
+    word-break: break-all;
+    padding-right: 10px;
+}
+
+.act-order-blocker-action .button {
+    padding: 2px 8px;
+    height: auto;
+    line-height: 1.5;
+}
+
+.act-order-blocker-action .act-already-blocked {
+    color: #135e12 !important;
+    background: #e7f5e7 !important;
+    border-color: #135e12 !important;
+}
+
+.act-order-blocker-action .act-unblock-from-order {
+    background: #f8f0f0;
+    border-color: #d63638;
+    color: #d63638;
+}
+
+.act-order-blocker-action .act-unblock-from-order:hover {
+    background: #d63638;
+    color: #fff;
+}
+
+.act-order-blocker-action .act-unblock-from-order .dashicons {
+    vertical-align: text-top;
+}
+
+
+/* Add this to the end of assets/css/admin-styles.css */
+
+
+/*
+ * 12. Lockdown Overlay
+ * ------------------------------------------------------------------ */
+
+.act-lockdown-overlay {
+    position: fixed;
+    top: 32px;
+    /* Account for admin bar */
+    left: 160px;
+    /* Account for admin menu width */
+    right: 0;
+    bottom: 0;
+    background-color: rgba(240, 246, 252, 0.95);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.act-lockdown-message {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 500px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
+
+.act-lockdown-message h2 {
+    font-size: 1.5em;
+    margin-top: 0;
+    color: #1e293b;
+}
+
+.act-lockdown-message p {
+    font-size: 1.1em;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+
+/* On smaller screens, the admin menu collapses */
+
+@media screen and (max-width: 782px) {
+    .act-lockdown-overlay {
+        left: 0;
+    }
+}
+
+
+/*
+ * 13. In-Widget Lockdown Overlay
+ * ------------------------------------------------------------------ */
+
+.act-widget-container-wrapper {
+    position: relative;
+    min-height: 400px;
+    /* Ensure widget has some height even when empty */
+}
+
+.act-widget-lockdown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.95);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+    z-index: 10;
+    border-radius: 3px;
+}
+
+.act-widget-lockdown-overlay p {
+    font-size: 14px;
+    color: #1d2327;
+    line-height: 1.5;
+    margin: 0;
+}
