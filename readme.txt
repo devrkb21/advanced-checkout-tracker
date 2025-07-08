@@ -2,7 +2,7 @@
 Contributors: coderzonebd
 Donate Link: https://coderzonebd.com/
 Tags: woocommerce, checkout, incomplete orders, abandoned cart, recovery, fraud, tracker, analytics
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 Tested up to: 6.8
 License: GPLv3 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
@@ -62,17 +62,15 @@ All data collected by this plugin (incomplete checkouts, blocked items, etc.) is
 = Is there a premium version? =
 Yes, a Pro version with advanced features and dedicated support is available on our website. This free version provides robust functionality without requiring an external license.
 
-== Screenshots ==
-1.  Screenshot of the Dashboard Overview.
-2.  Screenshot of the Incomplete Checkouts list.
-3.  Screenshot of the Checkout Details modal.
-4.  Screenshot of the Fraud Blocker management page.
-5.  Screenshot of the plugin Settings page.
-
 == Changelog ==
 
-= 1.0 =
+= 1.0.2 =
+* Fix: Updated success ratio blocker logic to correctly handle a grace period of 0.
+
+= 1.0.1 =
 * Initial Release.
+
+= 1.0 =
 * Incomplete checkout tracking.
 * Manual order recovery.
 * Fraud Blocker (IP, Email, Phone).
@@ -80,5 +78,3 @@ Yes, a Pro version with advanced features and dedicated support is available on 
 * Courier Analytics (local data only).
 * Blocked Orders Log.
 * Admin settings for data retention and module toggles.
-
-```
