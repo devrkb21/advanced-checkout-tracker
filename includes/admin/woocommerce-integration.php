@@ -195,7 +195,7 @@ function act_block_order_by_success_ratio()
     $total_orders = (int) ($ratio_data['grand_total']['total'] ?? 0);
     $success_rate = (int) ($ratio_data['grand_total']['rate'] ?? 100);
 
-    if ($total_orders > $grace_period && $success_rate <= $threshold) {
+    if ($total_orders >= $grace_period && $success_rate <= $threshold) {
         global $wpdb;
         $table_name = $wpdb->prefix . 'act_blocked_orders';
         $cart = WC()->cart;
