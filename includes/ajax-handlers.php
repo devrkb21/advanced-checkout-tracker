@@ -1231,6 +1231,8 @@ function act_get_blocked_order_details_ajax_handler()
     ?>
     <div class="act-entry-details">
         <p><strong><?php _e('Log ID:', 'advanced-checkout-tracker'); ?></strong> <?php echo esc_html($entry->id); ?></p>
+        <p><strong><?php _e('Name:', 'advanced-checkout-tracker'); ?></strong>
+            <?php echo esc_html(trim(($entry->first_name ?? '') . ' ' . ($entry->last_name ?? ''))); ?></p>
         <p><strong><?php _e('Phone Number:', 'advanced-checkout-tracker'); ?></strong>
             <?php echo esc_html($entry->phone_number); ?></p>
         <p><strong><?php _e('Email Address:', 'advanced-checkout-tracker'); ?></strong>

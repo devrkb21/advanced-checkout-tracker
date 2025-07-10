@@ -664,6 +664,7 @@ function act_render_blocked_orders_page()
                 <thead>
                     <tr>
                         <th><?php _e('ID', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Name', 'advanced-checkout-tracker'); ?></th>
                         <th><?php _e('Email', 'advanced-checkout-tracker'); ?></th>
                         <th><?php _e('Phone', 'advanced-checkout-tracker'); ?></th>
                         <th><?php _e('IP Address', 'advanced-checkout-tracker'); ?></th>
@@ -677,9 +678,8 @@ function act_render_blocked_orders_page()
                 <tbody id="act-blocked-orders-tbody">
                     <?php
                     if (empty($results)) {
-                        echo '<tr><td colspan="9">' . __('No orders have been blocked yet.', 'advanced-checkout-tracker') . '</td></tr>';
+                        echo '<tr><td colspan="10">' . __('No orders have been blocked yet.', 'advanced-checkout-tracker') . '</td></tr>'; // Changed colspan to 10
                     } else {
-                        // Use a new helper function to render the rows
                         echo act_get_blocked_orders_table_rows_html($results);
                     }
                     ?>
@@ -719,12 +719,17 @@ function act_get_blocked_orders_table_rows_html($results)
     ob_start();
     if (!empty($results)) {
         foreach ($results as $row) {
-            // Safely decode cart details
             $cart_items = json_decode($row->cart_details, true);
             $item_count = is_array($cart_items) ? count($cart_items) : 0;
+            $full_name = trim(($row->first_name ?? '') . ' ' . ($row->last_name ?? ''));
             ?>
-            <tr id="act-entry-row-<?php echo esc_attr($row->id); ?>">
+            <tr id="log-row-<?php echo esc_attr($row->id); ?>">
                 <td><?php echo esc_html($row->id); ?></td>
+                <td>
+                    <a href="#" class="act-view-details" data-type="blocked_order" data-log-id="<?php echo esc_attr($row->id); ?>">
+                        <strong><?php echo esc_html($full_name ?: '(No Name)'); ?></strong>
+                    </a>
+                </td>
                 <td><?php echo esc_html($row->email_address); ?></td>
                 <td><?php echo esc_html($row->phone_number); ?></td>
                 <td><?php echo esc_html($row->ip_address); ?></td>
@@ -738,18 +743,8 @@ function act_get_blocked_orders_table_rows_html($results)
                 </td>
                 <td class="act-actions-cell">
                     <?php
-                    // CORRECTED BUTTON: Add data-type and data-log-id
-                    printf(
-                        '<a href="#" class="button button-small act-view-details" data-type="blocked_order" data-log-id="%d" title="%s"><span class="dashicons dashicons-visibility"></span></a> ',
-                        esc_attr($row->id),
-                        __('View Details', 'advanced-checkout-tracker')
-                    );
-
-                    printf(
-                        '<button class="button button-small button-danger act-delete-blocked-log" data-log-id="%d" data-nonce="%s"><span class="dashicons dashicons-trash"></span></button>',
-                        esc_attr($row->id),
-                        wp_create_nonce('act_delete_blocked_log_nonce')
-                    );
+                    printf('<a href="#" class="button button-small act-view-details" data-type="blocked_order" data-log-id="%d" title="%s"><span class="dashicons dashicons-visibility"></span></a> ', esc_attr($row->id), __('View Details', 'advanced-checkout-tracker'));
+                    printf('<button class="button button-small button-danger act-delete-blocked-log" data-log-id="%d" data-nonce="%s"><span class="dashicons dashicons-trash"></span></button>', esc_attr($row->id), wp_create_nonce('act_delete_blocked_log_nonce'));
                     ?>
                 </td>
             </tr>

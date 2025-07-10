@@ -209,7 +209,18 @@ function act_block_order_by_success_ratio()
             }
         }
 
-        $wpdb->insert($table_name, ['blocked_at' => current_time('mysql'), 'phone_number' => $phone_number, 'email_address' => sanitize_email($_POST['billing_email'] ?? ''), 'cart_details' => wp_json_encode($cart_details_array), 'cart_value' => (float) $cart->get_total('edit'), 'success_ratio' => $success_rate, 'threshold_at_block' => $threshold, 'ip_address' => WC_Geolocation::get_ip_address()]);
+        $wpdb->insert($table_name, [
+            'blocked_at' => current_time('mysql'),
+            'first_name' => sanitize_text_field($_POST['billing_first_name'] ?? ''), // ADD THIS LINE
+            'last_name' => sanitize_text_field($_POST['billing_last_name'] ?? ''),   // ADD THIS LINE
+            'phone_number' => $phone_number,
+            'email_address' => sanitize_email($_POST['billing_email'] ?? ''),
+            'cart_details' => wp_json_encode($cart_details_array),
+            'cart_value' => (float) $cart->get_total('edit'),
+            'success_ratio' => $success_rate,
+            'threshold_at_block' => $threshold,
+            'ip_address' => WC_Geolocation::get_ip_address()
+        ]);
 
         // **THE FIX**: Use the custom message from settings
         $default_message = 'Your courier success ratio is {ratio}%, which is too low. Please contact us to complete your order.';

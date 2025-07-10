@@ -101,6 +101,10 @@ function act_check_customer_against_blocklists()
     }
 }
 
+/**
+ * Displays a custom-styled notice on the checkout page if a block was triggered.
+ * This is hooked into 'woocommerce_before_checkout_form' for reliability.
+ */
 function act_display_blocked_order_notice()
 {
     // Check if we are on the checkout page and if a session exists.
@@ -115,7 +119,7 @@ function act_display_blocked_order_notice()
         // Unset the session variable so the notice doesn't show up again on refresh.
         WC()->session->set('act_blocked_order_notice', null);
 
-        // Echo the custom styled notice.
+        // Echo the custom styled notice. This version does not use any icon fonts.
         ?>
         <style>
             .act-checkout-error-notice {
@@ -125,28 +129,17 @@ function act_display_blocked_order_notice()
                 font-size: 1.2em;
                 font-weight: 600;
                 border-radius: 8px;
+                border: none;
                 padding: 20px 25px;
                 margin: 0 0 2em 0;
                 box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 12px;
-            }
-
-            .act-checkout-error-notice::before {
-                content: '\\e016';
-                /* WooCommerce alert icon */
-                font-family: 'WooCommerce';
-                font-size: 1.6em;
-                line-height: 1;
             }
         </style>
         <div class="act-checkout-error-notice">
             <?php echo wp_kses_post($blocked_message); ?>
         </div>
         <script>
-            // Optional: Hide the default WooCommerce error list if it still appears.
+            // Hide the default WooCommerce error list to avoid duplicate messages.
             document.addEventListener('DOMContentLoaded', function () {
                 var defaultError = document.querySelector('.woocommerce-error, .woocommerce-NoticeGroup-checkout');
                 if (defaultError) {

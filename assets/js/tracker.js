@@ -101,56 +101,6 @@ jQuery(function ($) {
             }
         });
     }
-    // --- DYNAMIC NOTICE STYLING ---
-    // This section finds the default WooCommerce error notice and restyles it on the fly.
-    // This is more reliable than a popup in complex checkout environments.
-
-    const styleNotice = function () {
-        const notice = jQuery('.woocommerce-error');
-
-        // Check if the notice exists and hasn't been styled by us already.
-        if (notice.length && !notice.hasClass('act-styled-notice')) {
-            // Check for our specific block message keywords.
-            const noticeText = notice.text();
-            if (noticeText.includes('success ratio') || noticeText.includes('(Ref:')) {
-
-                // Add a class to mark it as styled.
-                notice.addClass('act-styled-notice');
-
-                // Apply styles directly with JavaScript.
-                notice.css({
-                    'background': 'linear-gradient(135deg, #e53935, #b71c1c)',
-                    'color': '#ffffff',
-                    'text-align': 'center',
-                    'font-size': '1.2em',
-                    'font-weight': '600',
-                    'border-radius': '8px',
-                    'border': 'none',
-                    'padding': '20px 25px',
-                    'margin-bottom': '2em',
-                    'box-shadow': '0 5px 15px rgba(0, 0, 0, 0.2)',
-                    'display': 'flex',
-                    'align-items': 'center',
-                    'justify-content': 'center',
-                    'gap': '12px'
-                });
-
-                // Prepend the icon using jQuery.
-                notice.find('li').css({ 'list-style': 'none', 'padding': '0', 'margin': '0' });
-                if (notice.find('.act-error-icon').length === 0) {
-                    notice.prepend('<span class="act-error-icon" style="font-family: WooCommerce; font-size: 1.6em; line-height: 1;">&#xe016;</span>');
-                }
-            }
-        }
-    };
-
-    // Listen for the two key events where WooCommerce might show an error.
-    jQuery(document.body).on('checkout_error updated_checkout', function () {
-        // Use a short delay to make sure the notice has been added to the page.
-        setTimeout(styleNotice, 100);
-    });
-
-    // Also run on initial page load, in case the error is already there.
-    styleNotice();
+    
 });
 
