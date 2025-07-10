@@ -1,11 +1,8 @@
 === Advanced Checkout Tracker ===
 Contributors: coderzonebd
-Donate Link: https://coderzonebd.com/
 Tags: woocommerce, checkout, incomplete orders, abandoned cart, recovery, fraud, tracker, analytics
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 Tested up to: 6.8
-License: GPLv3 or later
-License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
@@ -63,6 +60,15 @@ All data collected by this plugin (incomplete checkouts, blocked items, etc.) is
 Yes, a Pro version with advanced features and dedicated support is available on our website. This free version provides robust functionality without requiring an external license.
 
 == Changelog ==
+
+= 1.0.3 =
+* Fix: Blocked order log now deletes entries instantly without requiring a page refresh.
+* Fix: Checkout page block notices are now styled correctly and appear immediately without needing a page refresh.
+* Fix: Resolved an issue where an icon box (`\e016`) would appear in the block notice due to theme font conflicts.
+* Feature: Customer names are now saved and displayed in the Blocked Orders Log and the details view.
+* Feature: Added a stylish "Powered by" footer to the Courier Success History section.
+* Enhancement: Implemented a robust phone number normalization function to handle various input formats (e.g., `+880`, `01885-660190`, `01885 660190`) and standardize them.
+* Enhancement: Inaccurate incomplete checkout counts are now corrected by syncing with the HQ upon order completion.
 
 = 1.0.2 =
 * Fix: Updated success ratio blocker logic to correctly handle a grace period of 0.
