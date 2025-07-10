@@ -1,0 +1,66 @@
+/*
+ * Live Ratio Feedback Styles - v3 (Robust Fix)
+ */
+.act-ratio-feedback {
+    /* Layout & Positioning */
+    clear: both;
+    /* This is the key property to fix float issues. */
+    display: block;
+    /* Ensure it behaves as a block-level element. */
+    width: 100%;
+    margin-top: 10px;
+    /* Space above the feedback box. */
+    margin-bottom: 10px;
+    /* Space below the feedback box. */
+    box-sizing: border-box;
+
+    /* Appearance */
+    background-color: #f0f6fc;
+    /* A light, informative blue background */
+    border: 1px solid #cce1f6;
+    border-left-width: 4px;
+    border-left-color: #0073aa;
+    /* WordPress blue for emphasis */
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+.act-ratio-feedback strong {
+    color: #005a87;
+    font-weight: 600;
+}
+
+.act-ratio-feedback i {
+    color: #555d66;
+    /* Standard WP text color */
+}
+
+
+/*
+ * Custom Block Notice Styles (v2 - No Icon)
+ * Makes the standard WooCommerce error notice more prominent.
+ */
+.woocommerce-error {
+    background: linear-gradient(135deg, #e53935, #b71c1c) !important;
+    /* Strong red gradient */
+    color: #ffffff !important;
+    text-align: center !important;
+    font-size: 1.2em !important;
+    /* Larger font */
+    font-weight: 600 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 20px 25px !important;
+    margin-bottom: 2em !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.25);
+}
+
+/* Ensure the list item inside the notice is styled correctly */
+.woocommerce-error li {
+    list-style: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    text-align: center;
+}
