@@ -3,7 +3,11 @@
 Plugin Name: Advanced Checkout Tracker
 Plugin URI: https://coderzonebd.com/pricing
 Description: Tracks incomplete WooCommerce checkouts, provides recovery tools, a dashboard, and fraud blocking.
+<<<<<<< HEAD
 Version: 1.0.3
+=======
+Version: 1.0.2
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 Requires Plugins: woocommerce
 Author: Coder Zone BD
 Author URI: https://coderzonebd.com/
@@ -17,7 +21,11 @@ if (!defined('WPINC')) {
 }
 
 // Define Core Plugin Constants
+<<<<<<< HEAD
 define('ACT_VERSION', '1.0.3');
+=======
+define('ACT_VERSION', '1.0.2');
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 define('ACT_PLUGIN_DIR', plugin_dir_path(__FILE__));
 define('ACT_PLUGIN_URL', plugin_dir_url(__FILE__));
 define('ACT_PLUGIN_FILE', __FILE__);
@@ -56,7 +64,11 @@ function act_init_plugin()
 
         // Define the correct message based on the status
         // Define the correct message based on the status
+<<<<<<< HEAD
         $whatsapp_link = 'https://chat.whatsapp.com/JGUTBCNqK7d32zHWOQ4wzR';
+=======
+        $whatsapp_link = 'https://chat.whatsapp.com/JiDYW5f7k2uFd42YYSIhOD';
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         $contact_us_html = sprintf(
             /* translators: 1: opening <a> tag, 2: closing </a> tag */
             __('%1$scontact us%2$s', 'advanced-checkout-tracker'),
@@ -120,7 +132,10 @@ function act_init_plugin()
     add_action('wp_ajax_act_add_blocked_item', 'act_handle_add_blocked_item_ajax');
     add_action('wp_ajax_act_delete_blocked_item', 'act_handle_delete_blocked_item_ajax');
     add_action('wp_ajax_act_delete_blocked_log', 'act_handle_delete_blocked_log_ajax');
+<<<<<<< HEAD
     add_action('wp_ajax_act_get_blocked_order_details', 'act_get_blocked_order_details_ajax_handler');
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 
 
     add_action('wp_ajax_act_live_ratio_check', 'act_live_ratio_check_handler');
@@ -156,9 +171,15 @@ require 'plugin-update-checker/plugin-update-checker.php';
 use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
 
 $myUpdateChecker = PucFactory::buildUpdateChecker(
+<<<<<<< HEAD
     'https://github.com/devrkb21/advanced-checkout-tracker',
     __FILE__,
     'unique-plugin-or-theme-slug'
+=======
+	'https://github.com/devrkb21/advanced-checkout-tracker',
+	__FILE__,
+	'unique-plugin-or-theme-slug'
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 );
 
 //Set the branch that contains the stable release.

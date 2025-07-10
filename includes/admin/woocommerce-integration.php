@@ -209,6 +209,7 @@ function act_block_order_by_success_ratio()
             }
         }
 
+<<<<<<< HEAD
         $wpdb->insert($table_name, [
             'blocked_at' => current_time('mysql'),
             'first_name' => sanitize_text_field($_POST['billing_first_name'] ?? ''), // ADD THIS LINE
@@ -221,6 +222,9 @@ function act_block_order_by_success_ratio()
             'threshold_at_block' => $threshold,
             'ip_address' => WC_Geolocation::get_ip_address()
         ]);
+=======
+        $wpdb->insert($table_name, ['blocked_at' => current_time('mysql'), 'phone_number' => $phone_number, 'email_address' => sanitize_email($_POST['billing_email'] ?? ''), 'cart_details' => wp_json_encode($cart_details_array), 'cart_value' => (float) $cart->get_total('edit'), 'success_ratio' => $success_rate, 'threshold_at_block' => $threshold, 'ip_address' => WC_Geolocation::get_ip_address()]);
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 
         // **THE FIX**: Use the custom message from settings
         $default_message = 'Your courier success ratio is {ratio}%, which is too low. Please contact us to complete your order.';
@@ -229,11 +233,15 @@ function act_block_order_by_success_ratio()
 
         // This notice will now be caught by our JavaScript and shown in a popup
         wc_add_notice($final_message, 'error');
+<<<<<<< HEAD
         if (function_exists('WC') && WC()->session) {
             WC()->session->set('act_blocked_order_notice', $final_message);
         }
     }
 
+=======
+    }
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 }
 // Add the new check with a later priority to run after other validation
 add_action('woocommerce_checkout_process', 'act_block_order_by_success_ratio', 30);

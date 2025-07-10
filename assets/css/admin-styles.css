@@ -300,7 +300,10 @@
     0% {
         transform: rotate(0deg);
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     100% {
         transform: rotate(360deg);
     }
@@ -733,33 +736,51 @@ td a.act-view-details:focus {
  * ------------------------------------------------------------------ */
 
 @media screen and (max-width: 782px) {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     /* Responsive Tables */
     .act-table-responsive-wrapper {
         overflow-x: auto;
         border: 1px solid #c3c4c7;
         margin-bottom: 15px;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     .act-table-responsive-wrapper .wp-list-table {
         min-width: 800px;
         table-layout: auto !important;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     .act-table-responsive-wrapper .wp-list-table th,
     .act-table-responsive-wrapper .wp-list-table td {
         white-space: nowrap;
     }
+<<<<<<< HEAD
 
     .act-table-responsive-wrapper .wp-list-table th:last-child {
         width: auto !important;
     }
 
+=======
+    .act-table-responsive-wrapper .wp-list-table th:last-child {
+        width: auto !important;
+    }
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     /* Dashboard Chart */
     .act-dashboard-chart-container {
         width: 250px;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     /* Courier Analytics Page */
     .act-redesign-header {
         flex-direction: column;
@@ -767,19 +788,26 @@ td a.act-view-details:focus {
         gap: 15px;
         margin-bottom: 15px;
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     .act-redesign-container {
         flex-direction: column;
         /* Stack the columns */
         align-items: stretch;
         /* Allow columns to take full width */
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     .act-redesign-header {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
+<<<<<<< HEAD
 
     .act-summary-boxes {
         flex-direction: column;
@@ -789,6 +817,14 @@ td a.act-view-details:focus {
         flex-direction: column;
     }
 
+=======
+    .act-summary-boxes {
+        flex-direction: column;
+    }
+    .act-dashboard-layout-container {
+        flex-direction: column;
+    }
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     .act-blocker-sections {
         flex-direction: column;
     }
@@ -935,6 +971,7 @@ td a.act-view-details:focus {
     color: #1d2327;
     line-height: 1.5;
     margin: 0;
+<<<<<<< HEAD
 }
 
 
@@ -1050,4 +1087,6 @@ td a.act-view-details:focus {
 
 .act-powered-by a:hover {
     color: #3730a3;
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 }

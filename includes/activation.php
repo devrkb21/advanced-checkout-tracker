@@ -22,8 +22,11 @@ function act_create_blocked_orders_table()
     $sql = "CREATE TABLE $table_name (
         id mediumint(9) NOT NULL AUTO_INCREMENT,
         blocked_at datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+<<<<<<< HEAD
         first_name VARCHAR(100) DEFAULT '' NOT NULL, 
         last_name VARCHAR(100) DEFAULT '' NOT NULL,  
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         phone_number VARCHAR(20) NOT NULL,
         email_address VARCHAR(100) DEFAULT '' NOT NULL,
         cart_details longtext NOT NULL,

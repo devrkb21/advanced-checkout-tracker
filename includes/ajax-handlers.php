@@ -841,6 +841,12 @@ function act_perform_all_api_calls($phone_number, $order_id)
 /**
  * Helper function to generate the HTML for the responsive courier success display.
  */
+<<<<<<< HEAD
+=======
+/**
+ * Helper function to generate the HTML for the responsive courier success display.
+ */
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 function act_get_courier_success_html($results, $phone_number)
 {
     // Courier logos
@@ -954,6 +960,7 @@ function act_get_courier_success_html($results, $phone_number)
                     </tbody>
                 </table>
             </div>
+<<<<<<< HEAD
             <div class="act-powered-by">
                 <span class="powered-by-text">
                     Powered by <a href="https://coderzonebd.com" target="_blank">Coder Zone BD</a>
@@ -963,6 +970,8 @@ function act_get_courier_success_html($results, $phone_number)
                         Community</a>
                 </span>
             </div>
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         </div>
     </div>
     <?php
@@ -1180,6 +1189,7 @@ function act_handle_delete_blocked_log_ajax()
     } else {
         wp_send_json_error(['message' => __('Could not delete the log entry.', 'advanced-checkout-tracker')]);
     }
+<<<<<<< HEAD
 }
 
 /**
@@ -1271,4 +1281,6 @@ function act_get_blocked_order_details_ajax_handler()
 
     wp_send_json_success(['html' => $html_output]);
     wp_die();
+=======
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 }

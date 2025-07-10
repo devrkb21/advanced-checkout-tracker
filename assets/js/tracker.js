@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 jQuery(function ($) {
+=======
+jQuery(function($) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     'use strict';
 
     // Ensure our localized parameters object exists before running any logic.
@@ -33,7 +37,11 @@ jQuery(function ($) {
 
         // Send data only if at least one key field has been filled.
         if (checkoutData.billing_email || checkoutData.billing_phone || checkoutData.billing_first_name || checkoutData.billing_address_1) {
+<<<<<<< HEAD
             $.post(act_checkout_params.ajax_url, checkoutData, function (response) {
+=======
+            $.post(act_checkout_params.ajax_url, checkoutData, function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 // Optional: handle success or failure response.
                 // The one-time tracking flag 'act_session_tracked' has been removed
                 // to allow for continuous updates, capturing the most complete data.
@@ -70,15 +78,23 @@ jQuery(function ($) {
 
     // Only add the feedback div if the phone field exists.
     if (phoneField.length) {
+<<<<<<< HEAD
         // **FIX:** Append the feedback div INSIDE the phone field's container for better positioning.
         phoneField.closest('p.form-row').append('<div id="act-ratio-feedback" class="act-ratio-feedback" style="display:none;"></div>');
         const feedbackDiv = $('#act-ratio-feedback');
 
         phoneField.on('input', function () {
+=======
+        phoneField.closest('p.form-row').after('<div id="act-ratio-feedback" class="act-ratio-feedback" style="display:none; margin-top: 5px; font-size: 0.9em;"></div>');
+        const feedbackDiv = $('#act-ratio-feedback');
+
+        phoneField.on('input', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             clearTimeout(ratioDebounce);
             const phoneNumber = $(this).val().replace(/\s/g, ''); // Sanitize phone number
             feedbackDiv.html('').hide();
 
+<<<<<<< HEAD
             // Check for a specific length, adjust if needed for your country.
             if (phoneNumber.length >= 10) {
                 feedbackDiv.html('<i>Checking success ratio...</i>').show();
@@ -89,18 +105,76 @@ jQuery(function ($) {
                         phone_number: phoneNumber
                     })
                         .done(function (response) {
+=======
+            if (phoneNumber.length === 11) { // Check for a specific length.
+                feedbackDiv.html('<i>Checking success ratio...</i>').show();
+                ratioDebounce = setTimeout(function() {
+                    $.post(act_checkout_params.ajax_url, {
+                            action: 'act_live_ratio_check',
+                            nonce: act_checkout_params.live_ratio_check_nonce,
+                            phone_number: phoneNumber
+                        })
+                        .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                             if (response.success && response.data.rate !== undefined) {
                                 feedbackDiv.html(`<strong>Success Ratio: ${response.data.rate}%</strong>`);
                             } else {
                                 feedbackDiv.html(''); // Clear on failure or no rate
                             }
+<<<<<<< HEAD
                         }).fail(function () {
+=======
+                        }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                             feedbackDiv.html(''); // Clear on AJAX error
                         });
                 }, 600); // Debounce delay for the ratio check
             }
         });
     }
+<<<<<<< HEAD
     
 });
 
+=======
+
+
+    // --- POPUP NOTICE LOGIC (FINAL, WORKING VERSION) ---
+    // This section replaces the default WooCommerce error notice with a clean, user-friendly modal.
+    const modal = $('#act-checkout-notice-modal');
+
+    if (modal.length) {
+        const modalBody = $('#act-checkout-modal-body');
+        const closeModalButton = $('.act-checkout-modal-close');
+        const okButton = $('.act-checkout-modal-button');
+
+        // Target the specific WooCommerce error container.
+        const wcNoticeWrapper = $('.woocommerce-error');
+
+        // Check if the error container exists and has list items.
+        if (wcNoticeWrapper.length && wcNoticeWrapper.find('li').length > 0) {
+            const noticeContent = wcNoticeWrapper.find('li').first().html();
+
+            if (noticeContent) {
+                // Hide the original, less appealing notice.
+                wcNoticeWrapper.hide();
+                // Populate our custom modal with the error content and display it.
+                modalBody.html(noticeContent);
+                modal.css('display', 'flex');
+            }
+        }
+
+        const closeModal = () => modal.fadeOut();
+
+        // Event listeners to close the modal.
+        closeModalButton.on('click', closeModal);
+        okButton.on('click', closeModal);
+        modal.on('click', function(e) {
+            // Close if the user clicks on the modal background (overlay).
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    }
+});
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2

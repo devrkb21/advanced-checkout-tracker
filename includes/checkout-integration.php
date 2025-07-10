@@ -5,7 +5,11 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+<<<<<<< HEAD
  * Deletes the incomplete checkout entry and decrements the HQ usage count when an order is successfully placed.
+=======
+ * Deletes the incomplete checkout entry when an order is successfully placed.
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
  */
 function act_delete_incomplete_checkout_on_order_completion($order_id)
 {
@@ -26,6 +30,7 @@ function act_delete_incomplete_checkout_on_order_completion($order_id)
         global $wpdb;
         $table_name = $wpdb->prefix . 'act_incomplete_checkouts';
 
+<<<<<<< HEAD
         // Check if a record exists to be deleted.
         $record_exists = $wpdb->get_var($wpdb->prepare(
             "SELECT id FROM {$table_name} WHERE session_id = %s",
@@ -44,6 +49,13 @@ function act_delete_incomplete_checkout_on_order_completion($order_id)
                 act_decrement_usage_count('checkouts');
             }
         }
+=======
+        $wpdb->delete(
+            $table_name,
+            array('session_id' => $session_id_to_delete),
+            array('%s')
+        );
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     }
 }
 
@@ -102,6 +114,7 @@ function act_check_customer_against_blocklists()
 }
 
 /**
+<<<<<<< HEAD
  * Displays a custom-styled notice on the checkout page if a block was triggered.
  * This is hooked into 'woocommerce_before_checkout_form' for reliability.
  */
@@ -152,3 +165,14 @@ function act_display_blocked_order_notice()
 }
 // Hook high on the checkout form to display our message.
 add_action('woocommerce_before_checkout_form', 'act_display_blocked_order_notice', 5);
+=======
+ * Adds the modal HTML to the page footer on the checkout page.
+ */
+function act_add_checkout_modal_html()
+{
+    if (is_checkout() && !is_order_received_page()) {
+        echo '<div id="act-checkout-notice-modal" class="act-checkout-modal" style="display:none;"><div class="act-checkout-modal-content"><span class="act-checkout-modal-close">&times;</span><div id="act-checkout-modal-body"></div></div></div>';
+    }
+}
+add_action('wp_footer', 'act_add_checkout_modal_html');
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2

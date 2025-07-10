@@ -638,6 +638,10 @@ function act_render_courier_analytics_page()
     </div>
     <?php
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 function act_render_blocked_orders_page()
 {
     global $wpdb;
@@ -663,6 +667,7 @@ function act_render_blocked_orders_page()
             <table class="wp-list-table widefat fixed striped">
                 <thead>
                     <tr>
+<<<<<<< HEAD
                         <th><?php _e('ID', 'advanced-checkout-tracker'); ?></th>
                         <th><?php _e('Name', 'advanced-checkout-tracker'); ?></th>
                         <th><?php _e('Email', 'advanced-checkout-tracker'); ?></th>
@@ -683,6 +688,42 @@ function act_render_blocked_orders_page()
                         echo act_get_blocked_orders_table_rows_html($results);
                     }
                     ?>
+=======
+                        <th><?php _e('Blocked At', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Phone Number', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Email', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Cart Value', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Success Ratio (%)', 'advanced-checkout-tracker'); ?></th>
+                        <th><?php _e('Actions', 'advanced-checkout-tracker'); ?></th>
+                    </tr>
+                </thead>
+                <tbody id="act-blocked-orders-tbody">
+                    <?php if (empty($results)): ?>
+                        <tr>
+                            <td colspan="6"><?php _e('No orders have been blocked yet.', 'advanced-checkout-tracker'); ?></td>
+                        </tr>
+                    <?php else: ?>
+                        <?php foreach ($results as $row): ?>
+                            <tr id="log-row-<?php echo esc_attr($row->id); ?>">
+                                <td><?php echo esc_html(date_i18n(get_option('date_format') . ' ' . get_option('time_format'), strtotime($row->blocked_at))); ?>
+                                </td>
+                                <td><?php echo esc_html($row->phone_number); ?></td>
+                                <td><?php echo esc_html($row->email_address); ?></td>
+                                <td><?php echo wc_price($row->cart_value); ?></td>
+                                <td>
+                                    <span
+                                        style="color: red; font-weight: bold;"><?php echo esc_html($row->success_ratio); ?>%</span>
+                                    <small>(Threshold: <?php echo esc_html($row->threshold_at_block); ?>%)</small>
+                                </td>
+                                <td>
+                                    <button class="button button-small button-danger act-delete-blocked-log"
+                                        data-log-id="<?php echo esc_attr($row->id); ?>"
+                                        data-nonce="<?php echo wp_create_nonce('act_delete_blocked_log_nonce'); ?>">Delete</button>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 </tbody>
             </table>
         </div>
@@ -704,6 +745,7 @@ function act_render_blocked_orders_page()
                 ?>
             </div>
         </div>
+<<<<<<< HEAD
         <?php // Add the details modal to the page
             act_render_details_modal_html(); ?>
     </div>
@@ -753,3 +795,8 @@ function act_get_blocked_orders_table_rows_html($results)
     }
     return ob_get_clean();
 }
+=======
+    </div>
+    <?php
+}
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2

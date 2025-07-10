@@ -33,7 +33,11 @@ function act_render_main_dashboard_widget_content()
     $status = get_option('act_license_status', 'inactive');
     // Check for lockdown status
     if ($status === 'inactive' || $status === 'suspended') {
+<<<<<<< HEAD
         $whatsapp_link = 'https://chat.whatsapp.com/JGUTBCNqK7d32zHWOQ4wzR';
+=======
+        $whatsapp_link = 'https://chat.whatsapp.com/JiDYW5f7k2uFd42YYSIhOD';
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         $contact_link_start = '<a href="' . esc_url($whatsapp_link) . '" target="_blank">';
         $contact_link_end = '</a>';
 

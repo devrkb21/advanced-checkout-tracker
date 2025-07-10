@@ -231,6 +231,7 @@ function act_render_settings_page()
                             </tr>
                         </tbody>
                     </table>
+<<<<<<< HEAD
                     <div class="act-upgrade-section">
                         <div class="act-upgrade-icon">
                             <span class="dashicons dashicons-star-filled"></span>
@@ -246,6 +247,12 @@ function act_render_settings_page()
                                 Support</a>
                         </div>
                     </div>
+=======
+                    <br>
+                    <a href="https://coderzonebd.com/pricing" target="_blank" class="button-primary">
+                        <?php _e('Upgrade Your Plan', 'advanced-checkout-tracker'); ?>
+                    </a>
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 <?php endif; ?>
 
             <?php elseif ($active_tab == 'settings'): ?>
@@ -278,8 +285,12 @@ function act_render_data_retention_field()
         <option value="0" <?php selected($value, '0'); ?>><?php _e('Never Delete', 'advanced-checkout-tracker'); ?></option>
     </select>
     <p class="description">
+<<<<<<< HEAD
         <?php _e('Delete incomplete checkout records after this many days.', 'advanced-checkout-tracker'); ?>
     </p>
+=======
+        <?php _e('Delete incomplete checkout records after this many days.', 'advanced-checkout-tracker'); ?></p>
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     <?php
 }
 

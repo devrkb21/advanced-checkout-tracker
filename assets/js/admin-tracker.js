@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 jQuery(function ($) {
+=======
+jQuery(function($) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     'use strict';
 
     if (typeof act_admin_params === 'undefined') {
@@ -12,6 +16,7 @@ jQuery(function ($) {
         const modalBody = $('#act-modal-body');
         const closeModalButton = $('.act-modal-close');
 
+<<<<<<< HEAD
         $(document).on('click', '.act-view-details', function (e) {
             e.preventDefault();
             const $button = $(this);
@@ -24,10 +29,17 @@ jQuery(function ($) {
                 alert('Error: Could not find the entry ID.');
                 return;
             }
+=======
+        $(document).on('click', '.act-view-details', function(e) {
+            e.preventDefault();
+            const entryId = $(this).data('id');
+            if (!entryId) return;
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
 
             modalBody.html('<p>Loading details...</p>');
             modal.show();
 
+<<<<<<< HEAD
             // Determine which AJAX action to call
             const ajaxAction = entryType === 'blocked_order'
                 ? 'act_get_blocked_order_details'
@@ -38,12 +50,23 @@ jQuery(function ($) {
                 nonce: act_admin_params.view_details_nonce,
                 entry_id: entryId
             }).done(function (response) {
+=======
+            $.post(act_admin_params.ajax_url, {
+                action: 'act_get_checkout_details',
+                nonce: act_admin_params.view_details_nonce,
+                entry_id: entryId
+            }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     modalBody.html(response.data.html);
                 } else {
                     modalBody.html('<p class="error-message">' + (response.data.message || 'Could not load details.') + '</p>');
                 }
+<<<<<<< HEAD
             }).fail(function () {
+=======
+            }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 modalBody.html('<p class="error-message">An error occurred while fetching details.</p>');
             });
         });
@@ -58,7 +81,11 @@ jQuery(function ($) {
     const modalBody = $('#act-modal-body');
     const closeModalButton = $('.act-modal-close');
 
+<<<<<<< HEAD
     $(document).on('click', '.act-view-details', function (e) {
+=======
+    $(document).on('click', '.act-view-details', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const entryId = $(this).data('id');
         if (!entryId) return;
@@ -70,13 +97,21 @@ jQuery(function ($) {
             action: 'act_get_checkout_details',
             nonce: act_admin_params.view_details_nonce,
             entry_id: entryId
+<<<<<<< HEAD
         }).done(function (response) {
+=======
+        }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             if (response.success) {
                 modalBody.html(response.data.html);
             } else {
                 modalBody.html('<p class="error-message">' + (response.data.message || 'Could not load details.') + '</p>');
             }
+<<<<<<< HEAD
         }).fail(function () {
+=======
+        }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             modalBody.html('<p class="error-message">An error occurred while fetching details.</p>');
         });
     });
@@ -103,13 +138,21 @@ jQuery(function ($) {
         let data = { action, nonce, entry_id: entryId, ...extraData };
 
         $.post(act_admin_params.ajax_url, data)
+<<<<<<< HEAD
             .done(function (response) {
+=======
+            .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     alert(response.data.message);
                     if (action === 'act_recover_order' && response.data.edit_order_url) {
                         window.location.href = response.data.edit_order_url;
                     } else {
+<<<<<<< HEAD
                         $('#act-entry-row-' + entryId).fadeOut(500, function () {
+=======
+                        $('#act-entry-row-' + entryId).fadeOut(500, function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                             $(this).remove();
                         });
                     }
@@ -117,18 +160,30 @@ jQuery(function ($) {
                     alert('Error: ' + (response.data.message || 'An unknown error occurred.'));
                     $button.prop('disabled', false).html(originalButtonHtml);
                 }
+<<<<<<< HEAD
             }).fail(function () {
+=======
+            }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 alert('An AJAX error occurred. Please check the browser console.');
                 $button.prop('disabled', false).html(originalButtonHtml);
             });
     }
 
+<<<<<<< HEAD
     $(document).on('click', '.act-recover-order', function (e) {
+=======
+    $(document).on('click', '.act-recover-order', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         handleRowAction(this, 'Are you sure you want to recover this as a new WooCommerce order?', 'act_recover_order', act_admin_params.recover_order_nonce);
     });
 
+<<<<<<< HEAD
     $(document).on('click', '.act-mark-hold', function (e) {
+=======
+    $(document).on('click', '.act-mark-hold', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const followUpDate = prompt('Enter follow-up date (YYYY-MM-DD), or leave blank:', new Date().toISOString().slice(0, 10));
         if (followUpDate === null) return;
@@ -139,17 +194,29 @@ jQuery(function ($) {
         handleRowAction(this, false, 'act_mark_hold', act_admin_params.mark_hold_nonce, { follow_up_date: followUpDate });
     });
 
+<<<<<<< HEAD
     $(document).on('click', '.act-mark-cancelled', function (e) {
+=======
+    $(document).on('click', '.act-mark-cancelled', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         handleRowAction(this, 'Are you sure you want to mark this entry as cancelled?', 'act_mark_cancelled', act_admin_params.mark_cancelled_nonce);
     });
 
+<<<<<<< HEAD
     $(document).on('click', '.act-reopen-checkout', function (e) {
+=======
+    $(document).on('click', '.act-reopen-checkout', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         handleRowAction(this, 'Are you sure you want to re-open this entry to "Incomplete"?', 'act_reopen_checkout', act_admin_params.reopen_checkout_nonce);
     });
 
+<<<<<<< HEAD
     $(document).on('click', '.act-edit-follow-up-date', function (e) {
+=======
+    $(document).on('click', '.act-edit-follow-up-date', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const $button = $(this);
         const entryId = $button.data('id');
@@ -170,7 +237,11 @@ jQuery(function ($) {
             nonce: act_admin_params.edit_follow_up_date_nonce,
             entry_id: entryId,
             new_follow_up_date: newFollowUpDate
+<<<<<<< HEAD
         }).done(function (response) {
+=======
+        }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             if (response.success) {
                 alert(response.data.message);
                 $('.act-follow-up-date-cell-' + entryId).text(response.data.new_date_formatted);
@@ -178,9 +249,15 @@ jQuery(function ($) {
             } else {
                 alert('Error: ' + (response.data.message || 'Could not update date.'));
             }
+<<<<<<< HEAD
         }).fail(function () {
             alert('An AJAX error occurred while updating the date.');
         }).always(function () {
+=======
+        }).fail(function() {
+            alert('An AJAX error occurred while updating the date.');
+        }).always(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             $button.prop('disabled', false).html(originalButtonHtml);
         });
     });
@@ -219,7 +296,11 @@ jQuery(function ($) {
         };
 
         $.post(act_admin_params.ajax_url, ajaxData)
+<<<<<<< HEAD
             .done(function (response) {
+=======
+            .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     const table = tableContainer.find('table');
                     const emptyMsg = tableContainer.find('.act-table-empty-message');
@@ -236,15 +317,25 @@ jQuery(function ($) {
                 } else {
                     tbody.html(`<tr><td colspan="10">Error: ${response.data.message || 'Could not load data.'}</td></tr>`);
                 }
+<<<<<<< HEAD
             }).fail(function () {
                 tbody.html(`<tr><td colspan="10">AJAX Error: Request failed.</td></tr>`);
             }).always(function () {
+=======
+            }).fail(function() {
+                tbody.html(`<tr><td colspan="10">AJAX Error: Request failed.</td></tr>`);
+            }).always(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 loadingDiv.hide();
                 tableContainer.show();
             });
     }
 
+<<<<<<< HEAD
     $('.act-list-page-filters .act-filter-buttons button').on('click', function () {
+=======
+    $('.act-list-page-filters .act-filter-buttons button').on('click', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         const $button = $(this);
         const filterGroup = $button.closest('.act-list-page-filters');
         const pagePrefix = filterGroup.data('page-prefix');
@@ -259,7 +350,11 @@ jQuery(function ($) {
         fetchEntriesForTable(pagePrefix, $button.data('range'));
     });
 
+<<<<<<< HEAD
     $('.act-list-page-filters .button-primary').on('click', function () {
+=======
+    $('.act-list-page-filters .button-primary').on('click', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         const filterGroup = $(this).closest('.act-list-page-filters');
         const pagePrefix = filterGroup.data('page-prefix');
 
@@ -328,15 +423,25 @@ jQuery(function ($) {
                 range: range,
                 start_date: startDate,
                 end_date: endDate
+<<<<<<< HEAD
             }).done(function (response) {
+=======
+            }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     updateDashboardStats(response.data);
                 } else {
                     alert('Error loading dashboard data: ' + (response.data.message || 'Unknown error.'));
                 }
+<<<<<<< HEAD
             }).fail(function () {
                 alert('AJAX error while loading dashboard data.');
             }).always(function () {
+=======
+            }).fail(function() {
+                alert('AJAX error while loading dashboard data.');
+            }).always(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 $('#act-dashboard-loading').hide();
                 $('.act-dashboard-chart-container, .act-dashboard-counts, .act-dashboard-values').css('opacity', 1);
             });
@@ -344,7 +449,11 @@ jQuery(function ($) {
 
         const dashboardFilterGroup = $('.act-dashboard-filters');
 
+<<<<<<< HEAD
         dashboardFilterGroup.find('.act-filter-buttons button').on('click', function () {
+=======
+        dashboardFilterGroup.find('.act-filter-buttons button').on('click', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             const $button = $(this);
             dashboardFilterGroup.find('.act-filter-buttons button').removeClass('active');
             $button.addClass('active');
@@ -354,7 +463,11 @@ jQuery(function ($) {
             fetchDashboardData($button.data('range'));
         });
 
+<<<<<<< HEAD
         dashboardFilterGroup.find('.act_dashboard_apply_date_filter').on('click', function () {
+=======
+        dashboardFilterGroup.find('.act_dashboard_apply_date_filter').on('click', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             const startDate = dashboardFilterGroup.find('#act_dashboard_start_date').val();
             const endDate = dashboardFilterGroup.find('#act_dashboard_end_date').val();
 
@@ -374,7 +487,11 @@ jQuery(function ($) {
     }
 
     // --- Courier Analytics Page Handler ---
+<<<<<<< HEAD
     $(document).on('click', '#act_check_ratio_btn', function (e) {
+=======
+    $(document).on('click', '#act_check_ratio_btn', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const $button = $(this);
         const $spinner = $button.siblings('.spinner');
@@ -388,12 +505,21 @@ jQuery(function ($) {
         resultsContainer.fadeOut(200);
 
         $.post(act_admin_params.ajax_url, {
+<<<<<<< HEAD
             action: 'act_check_courier_success',
             act_courier_nonce: nonce,
             phone_number: phoneNumber,
             order_id: 0
         })
             .done(function (response) {
+=======
+                action: 'act_check_courier_success',
+                act_courier_nonce: nonce,
+                phone_number: phoneNumber,
+                order_id: 0
+            })
+            .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     resultsContainer.html(response.data.html).fadeIn(200);
                     initSuccessRatioChart(); // Call the chart function
@@ -401,15 +527,24 @@ jQuery(function ($) {
                     alert('Error: ' + (response.data ? response.data.message : 'An unknown error occurred.'));
                 }
             })
+<<<<<<< HEAD
             .fail(function () { alert('An AJAX error occurred.'); })
             .always(function () {
+=======
+            .fail(function() { alert('An AJAX error occurred.'); })
+            .always(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 $spinner.removeClass('is-active');
                 $button.prop('disabled', false);
             });
     });
 
     // --- Order List Success Ratio Handler ---
+<<<<<<< HEAD
     $(document).on('click', '.act-check-order-ratio, .act-refresh-order-ratio', function (e) {
+=======
+    $(document).on('click', '.act-check-order-ratio, .act-refresh-order-ratio', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
 
         const $button = $(this);
@@ -425,25 +560,42 @@ jQuery(function ($) {
         $container.html('<span class="spinner is-active" style="float:left;"></span>');
 
         $.post(act_admin_params.ajax_url, {
+<<<<<<< HEAD
             action: 'act_check_order_success_ratio',
             act_order_nonce: nonce,
             phone_number: phoneNumber,
             order_id: $container.data('order-id')
         })
             .done(function (response) {
+=======
+                action: 'act_check_order_success_ratio',
+                act_order_nonce: nonce,
+                phone_number: phoneNumber,
+                order_id: $container.data('order-id')
+            })
+            .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     $container.html(response.data.html);
                 } else {
                     $container.html('<em>Error</em>');
                 }
             })
+<<<<<<< HEAD
             .fail(function () {
+=======
+            .fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 $container.html('<em>Request Failed</em>');
             });
     });
 
     // --- Order List Column Handler ---
+<<<<<<< HEAD
     $(document).on('click', '.act-check-order-ratio', function (e) {
+=======
+    $(document).on('click', '.act-check-order-ratio', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const $button = $(this);
         const $container = $button.closest('.act-success-ratio-container');
@@ -455,21 +607,38 @@ jQuery(function ($) {
         $container.html('<span class="spinner is-active" style="float:left;"></span>');
 
         $.post(act_admin_params.ajax_url, {
+<<<<<<< HEAD
             action: 'act_check_order_success_ratio',
             act_order_nonce: nonce,
             phone_number: phoneNumber,
             order_id: orderId
         })
             .done(function (response) {
+=======
+                action: 'act_check_order_success_ratio',
+                act_order_nonce: nonce,
+                phone_number: phoneNumber,
+                order_id: orderId
+            })
+            .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     $container.hide().html(response.data.html).fadeIn(300);
                 } else { $container.html('<em>Error</em>'); }
             })
+<<<<<<< HEAD
             .fail(function () { $container.html('<em>Request Failed</em>'); });
     });
 
     // --- Single Order Page Meta Box Handler ---
     $(document).on('click', '.act-meta-box-trigger', function (e) {
+=======
+            .fail(function() { $container.html('<em>Request Failed</em>'); });
+    });
+
+    // --- Single Order Page Meta Box Handler ---
+    $(document).on('click', '.act-meta-box-trigger', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
         const $button = $(this);
         const $container = $('#act_order_detail_ratio_container');
@@ -481,6 +650,7 @@ jQuery(function ($) {
         $container.html('<span class="spinner is-active" style="display:block; margin: 10px auto;"></span>');
 
         $.post(act_admin_params.ajax_url, {
+<<<<<<< HEAD
             action: 'act_check_courier_success',
             act_courier_nonce: nonce,
             phone_number: phoneNumber,
@@ -489,12 +659,26 @@ jQuery(function ($) {
             .done(function (response) {
                 if (response.success) {
                     $container.fadeOut(200, function () {
+=======
+                action: 'act_check_courier_success',
+                act_courier_nonce: nonce,
+                phone_number: phoneNumber,
+                order_id: orderId
+            })
+            .done(function(response) {
+                if (response.success) {
+                    $container.fadeOut(200, function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                         $(this).html(response.data.html).fadeIn(200);
                         initSuccessRatioChart(); // Call the chart function
                     });
                 } else { $container.html('<p>Error</p>'); }
             })
+<<<<<<< HEAD
             .fail(function () { $container.html('<p>AJAX Error</p>'); });
+=======
+            .fail(function() { $container.html('<p>AJAX Error</p>'); });
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
     });
 
 
@@ -548,13 +732,21 @@ jQuery(function ($) {
 
 
         // Handle live searching/filtering of the lists
+<<<<<<< HEAD
         $('.act-blocker-search').on('keyup input', function () {
+=======
+        $('.act-blocker-search').on('keyup input', function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             const searchTerm = $(this).val().toLowerCase();
             const listId = $(this).data('list-id');
             const $list = $('#' + listId);
             let itemsFound = 0;
 
+<<<<<<< HEAD
             $list.find('li').each(function () {
+=======
+            $list.find('li').each(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 const $item = $(this);
                 // Ignore the 'no items' message
                 if ($item.hasClass('act-no-items')) {
@@ -579,7 +771,11 @@ jQuery(function ($) {
         });
 
         // Handle ADDING a new blocked item
+<<<<<<< HEAD
         $('.act-blocker-form').on('submit', function (e) {
+=======
+        $('.act-blocker-form').on('submit', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             e.preventDefault();
 
             const $form = $(this);
@@ -601,7 +797,11 @@ jQuery(function ($) {
             };
 
             $.post(act_admin_params.ajax_url, formData)
+<<<<<<< HEAD
                 .done(function (response) {
+=======
+                .done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                     if (response.success) {
                         // Remove the "no items" message if it exists
                         list.find('.act-no-items').remove();
@@ -614,21 +814,33 @@ jQuery(function ($) {
                         messagesDiv.removeClass('notice-success').addClass('notice-error').html('<p>Error: ' + response.data.message + '</p>').slideDown().delay(4000).slideUp();
                     }
                 })
+<<<<<<< HEAD
                 .fail(function (xhr) {
+=======
+                .fail(function(xhr) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                     let errorMessage = 'An unexpected error occurred. Please try again.';
                     if (xhr.responseJSON && xhr.responseJSON.data && xhr.responseJSON.data.message) {
                         errorMessage = xhr.responseJSON.data.message;
                     }
                     messagesDiv.removeClass('notice-success').addClass('notice-error').html('<p>Error: ' + errorMessage + '</p>').slideDown().delay(4000).slideUp();
                 })
+<<<<<<< HEAD
                 .always(function () {
+=======
+                .always(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                     $button.prop('disabled', false);
                     $spinner.removeClass('is-active');
                 });
         });
 
         // Handle DELETING a blocked item
+<<<<<<< HEAD
         $(document).on('click', '.act-delete-item-ajax', function (e) {
+=======
+        $(document).on('click', '.act-delete-item-ajax', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             e.preventDefault();
 
             if (!confirm('Are you sure you want to delete this item?')) {
@@ -656,6 +868,7 @@ jQuery(function ($) {
             postData.nonce = act_admin_params.delete_blocker_item_nonce; // We need to add this nonce
 
             $.post(act_admin_params.ajax_url, {
+<<<<<<< HEAD
                 action: 'act_delete_blocked_item',
                 nonce: $link.data('nonce'),
                 item_id: $link.data('item-id'),
@@ -664,6 +877,16 @@ jQuery(function ($) {
                 .done(function (response) {
                     if (response.success) {
                         $listItem.fadeOut(300, function () {
+=======
+                    action: 'act_delete_blocked_item',
+                    nonce: $link.data('nonce'),
+                    item_id: $link.data('item-id'),
+                    block_type: $link.data('block-type')
+                })
+                .done(function(response) {
+                    if (response.success) {
+                        $listItem.fadeOut(300, function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                             $(this).remove();
                             if (list.children().length === 0) {
                                 list.html('<li class="act-no-items">No items currently blocked.</li>');
@@ -674,7 +897,11 @@ jQuery(function ($) {
                         messagesDiv.removeClass('notice-success').addClass('notice-error').html('<p>Error: ' + response.data.message + '</p>').slideDown().delay(4000).slideUp();
                     }
                 })
+<<<<<<< HEAD
                 .fail(function () {
+=======
+                .fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                     $listItem.css('opacity', '1');
                     messagesDiv.removeClass('notice-success').addClass('notice-error').html('<p>An unexpected error occurred. Please try again.</p>').slideDown().delay(4000).slideUp();
                 });
@@ -685,7 +912,11 @@ jQuery(function ($) {
     if ($('body').hasClass('post-type-shop_order')) {
 
         // Handle the click event for the "Block" button
+<<<<<<< HEAD
         $(document).on('click', '.act-block-from-order', function (e) {
+=======
+        $(document).on('click', '.act-block-from-order', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             e.preventDefault();
             const $button = $(this),
                 blockType = $button.data('block-type'),
@@ -699,7 +930,11 @@ jQuery(function ($) {
                 block_type: blockType,
                 value,
                 reason: `Blocked from Order #${$('#post_ID').val()}`
+<<<<<<< HEAD
             }).done(function (response) {
+=======
+            }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     // ** THE FIX IS HERE: Use the correct nonce for the new Unblock button **
                     const unblockNonce = act_admin_params.delete_blocker_item_nonce;
@@ -709,14 +944,22 @@ jQuery(function ($) {
                     alert('Error: ' + response.data.message);
                     $button.prop('disabled', false).html(`<span class="dashicons dashicons-shield-alt"></span> Block`);
                 }
+<<<<<<< HEAD
             }).fail(function () {
+=======
+            }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 alert('An unexpected error occurred.');
                 $button.prop('disabled', false).html(`<span class="dashicons dashicons-shield-alt"></span> Block`);
             });
         });
 
         // Handle the click event for the "Unblock" button
+<<<<<<< HEAD
         $(document).on('click', '.act-unblock-from-order', function (e) {
+=======
+        $(document).on('click', '.act-unblock-from-order', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             e.preventDefault();
             const $button = $(this),
                 blockType = $button.data('block-type'),
@@ -729,7 +972,11 @@ jQuery(function ($) {
                 nonce,
                 block_type: blockType,
                 value
+<<<<<<< HEAD
             }).done(function (response) {
+=======
+            }).done(function(response) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 if (response.success) {
                     // ** THE FIX IS HERE: Use the correct nonce for the new Block button **
                     const newNonce = act_admin_params.fraud_blocker_nonce;
@@ -739,7 +986,11 @@ jQuery(function ($) {
                     alert('Error: ' + response.data.message);
                     $button.prop('disabled', false).html('<span class="dashicons dashicons-unlock"></span> Unblock');
                 }
+<<<<<<< HEAD
             }).fail(function () {
+=======
+            }).fail(function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                 alert('An unexpected error occurred.');
                 $button.prop('disabled', false).html('<span class="dashicons dashicons-unlock"></span> Unblock');
             });
@@ -747,8 +998,12 @@ jQuery(function ($) {
     }
 
     // Handle deleting a blocked order log
+<<<<<<< HEAD
     // Handle deleting a blocked order log
     $(document).on('click', '.act-delete-blocked-log', function (e) {
+=======
+    $(document).on('click', '.act-delete-blocked-log', function(e) {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
         e.preventDefault();
 
         if (!confirm('Are you sure you want to permanently delete this log entry?')) {
@@ -758,6 +1013,7 @@ jQuery(function ($) {
         const $button = $(this);
         const logId = $button.data('log-id');
         const nonce = $button.data('nonce');
+<<<<<<< HEAD
         const $row = $('#log-row-' + logId); // Correctly targets the row
 
         $button.prop('disabled', true).html('<span class="dashicons dashicons-trash"></span>');
@@ -771,16 +1027,39 @@ jQuery(function ($) {
                 if (response.success) {
                     // This is the key part: fade out and remove the row on success
                     $row.css('background-color', '#fee2e2').fadeOut(400, function () {
+=======
+        const $row = $('#log-row-' + logId);
+
+        $button.prop('disabled', true).text('Deleting...');
+
+        $.post(act_admin_params.ajax_url, {
+                action: 'act_delete_blocked_log',
+                nonce: nonce,
+                log_id: logId
+            })
+            .done(function(response) {
+                if (response.success) {
+                    $row.fadeOut(400, function() {
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
                         $(this).remove();
                     });
                 } else {
                     alert('Error: ' + (response.data.message || 'Could not delete log.'));
+<<<<<<< HEAD
                     $button.prop('disabled', false);
                 }
             })
             .fail(function () {
                 alert('An AJAX error occurred.');
                 $button.prop('disabled', false);
+=======
+                    $button.prop('disabled', false).text('Delete');
+                }
+            })
+            .fail(function() {
+                alert('An AJAX error occurred.');
+                $button.prop('disabled', false).text('Delete');
+>>>>>>> 14d30c7c49dccb12eb1a04f0f43dab94d7fbd3e2
             });
     });
 
